@@ -61,8 +61,8 @@ app.get("/task2.htm", (req, res) => {
 
 	console.log("Data: ", data);
 
-	if (!fs.existsSync(data.imagePath)) {
-		data.imagePath = "./images" + data.imagePath;
+	if (!fs.existsSync(data.quotePath)) {
+		// data.imagePath = "./images" + data.imagePath;
 		data.quotePath = "./images" + data.quotePath;
 	}
 
@@ -91,7 +91,33 @@ app.get("/task4-details.htm", (req, res) => {
 	}
 	// console.log(data);
 
-	res.render("task4-details", data);
+	res.render("task4-details", { layout: "task4DetailLayout", zodiac: data });
+});
+
+app.get("/task2.htm", (req, res) => {
+	let title = req.query["title"];
+	console.log(title);
+
+	if (title != undefined) {
+		let data = null;
+		for (let i = 0; i < emotions.length; i++) {
+			if (emotions[i].title === title) {
+				data = emotions[i];
+			}
+		}
+
+		if (!fs.existsSync(data.quotePath)) {
+			data.quotePath = "./images" + data.quotePath;
+		}
+
+		res.render("task2", { layout: "layout_2", quotePath: data.quotePath });
+	} else {
+		fs.readFile("task2.htm", (err, data) => {
+			res.statusCode = 200;
+			res.setHeader("content-type", "text/html");
+			res.send(data);
+		});
+	}
 });
 
 app.listen(port, function () {
