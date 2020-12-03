@@ -1,0 +1,7 @@
+Group 05:
+Đinh Hoàng Dương: 18127084 - Task 4
+Khưu Vĩ Luân: 18127146 - Task 1
+Dương Tấn Phát: 18127175 - Task 2
+
+Heroku link: Jeopardize Contest (group05-task-1-2-4.herokuapp.com)
+Github link: https://github.com/tarzanchemgio/Group05-HandleBars.git
