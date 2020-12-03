@@ -49,7 +49,7 @@ app.engine(
 app.set("view engine", "hbs");
 
 app.get("/task2.htm", (req, res) => {
-  fs.readFile("task4.htm", (err, data) => {
+  fs.readFile("task2.htm", (err, data) => {
     res.statusCode = 200;
     res.setHeader("content-type", "text/html");
     res.send(data);
