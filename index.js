@@ -10,6 +10,7 @@ const dataJs = require("./data");
 
 /* task 4 */
 var zodiacs = dataJs.zodiacs;
+var emotions = dataJs.emotions;
 
 app.use("/images", express.static(path.join(__dirname, "./images")));
 app.use("/stylesheets", express.static(path.join(__dirname, "./stylesheets")));
@@ -18,7 +19,7 @@ app.engine(
 	"hbs",
 	hbs({
 		extname: "hbs",
-		defaultLayout: "layout",
+		defaultLayout: "task4DetailLayout",
 		layoutsDir: __dirname + "/views/layouts/",
 		partialsDir: __dirname + "/views/partials/",
 	})
@@ -59,10 +60,10 @@ app.get("/task2.htm", (req, res) => {
 		};
 	}
 
-	console.log("Data: ", data);
+	// console.log("Data: ", data);
 
 	if (!fs.existsSync(data.quotePath)) {
-		// data.imagePath = "./images" + data.imagePath;
+		data.imagePath = "./images" + data.imagePath;
 		data.quotePath = "./images" + data.quotePath;
 	}
 
@@ -92,32 +93,6 @@ app.get("/task4-details.htm", (req, res) => {
 	// console.log(data);
 
 	res.render("task4-details", { layout: "task4DetailLayout", zodiac: data });
-});
-
-app.get("/task2.htm", (req, res) => {
-	let title = req.query["title"];
-	console.log(title);
-
-	if (title != undefined) {
-		let data = null;
-		for (let i = 0; i < emotions.length; i++) {
-			if (emotions[i].title === title) {
-				data = emotions[i];
-			}
-		}
-
-		if (!fs.existsSync(data.quotePath)) {
-			data.quotePath = "./images" + data.quotePath;
-		}
-
-		res.render("task2", { layout: "layout_2", quotePath: data.quotePath });
-	} else {
-		fs.readFile("task2.htm", (err, data) => {
-			res.statusCode = 200;
-			res.setHeader("content-type", "text/html");
-			res.send(data);
-		});
-	}
 });
 
 app.listen(port, function () {
