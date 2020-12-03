@@ -166,7 +166,7 @@ var zodiacs = [
 ];
 
 app.use("/images", express.static(path.join(__dirname, "./images")));
-app.use(express.static(path.join(__dirname, "./stylesheets")));
+app.use("/stylesheets", express.static(path.join(__dirname, "./stylesheets")));
 
 app.engine(
 	"hbs",
