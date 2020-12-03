@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/tarzanchemgio/Group05-HandleBars/issues"
   },
-  "homepage": "https://github.com/tarzanchemgio/Group05-HandleBars#readme"
+  "homepage": "https://github.com/tarzanchemgio/Group05-HandleBars#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
+    "handlebars": "^4.7.6"
+  }
 }
