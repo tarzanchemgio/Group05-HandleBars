@@ -4,6 +4,8 @@ var path = require("path");
 const hbs = require("express-handlebars");
 const fs = require("fs");
 
+const port = process.env.PORT || 3000;
+
 /* task 4 */
 var zodiacs = [
 	{
@@ -203,6 +205,6 @@ app.get("/task4-details.htm", (req, res) => {
 	res.render("task4-details", data);
 });
 
-app.listen(5000, function () {
-	console.log("Server is listening on port 5000...");
+app.listen(port, function () {
+	console.log(`Server is listening on port ${port}...`);
 });
