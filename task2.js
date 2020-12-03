@@ -7,11 +7,6 @@ const fs = require("fs");
 /* task 2 */
 var emotions = [
 	{
-		title: "default",
-		imagePath: "images/task2/default.jpg",
-		quotePath: "images/task2/default.jpg",
-	},
-	{
 		title: "happy",
 		imagePath: "/task2/happy.jpeg",
 		quotePath: "/task2/happy/happy1.jpg",
@@ -49,23 +44,6 @@ app.engine(
 app.set("view engine", "hbs");
 
 app.get("/task2.htm", (req, res) => {
-	let title = req.query["title"];
-	console.log(title);
-	if (title != undefined) {
-		let data = null;
-		for (let i = 0; i < emotions.length; i++) {
-			if (emotions[i].title === title) {
-				data = emotions[i];
-			}
-		}
-
-		if (!fs.existsSync(data.imagePath)) {
-			data.imagePath = "./images" + data.imagePath;
-		}
-
-		res.render("task2", data);
-	}
-
 	fs.readFile("task2.htm", (err, data) => {
 		res.statusCode = 200;
 		res.setHeader("content-type", "text/html");
@@ -74,15 +52,23 @@ app.get("/task2.htm", (req, res) => {
 });
 
 app.get("/task2.htm", (req, res) => {
-	let name = req.query["title"];
-	console.log(name);
-
+	let title = req.query["emotion"];
 	let data = null;
 	for (let i = 0; i < emotions.length; i++) {
 		if (emotions[i].title === title) {
 			data = emotions[i];
 		}
 	}
+
+	if (data === null) {
+		data = {
+			title: "default",
+			imagePath: "images/task2/default.jpg",
+			quotePath: "images/task2/default.jpg",
+		};
+	}
+
+	console.log("Data: ", data);
 
 	if (!fs.existsSync(data.imagePath)) {
 		data.imagePath = "./images" + data.imagePath;
